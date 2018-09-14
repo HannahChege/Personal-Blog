@@ -2,21 +2,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField,BooleanField
 from wtforms.validators import Required
 
-# class ContentForm(FlaskForm):
-#    content = TextAreaField('YOUR PITCH')
-#    submit = SubmitField('SUBMIT')
-
-# class CommentForm(FlaskForm):
-#    comment_id = TextAreaField('WRITE COMMENT')
-#    submit = SubmitField('SUBMIT')
-
 class BlogForm(FlaskForm):  # create a class that inherits from FlaskForm class
-   name = StringField('Authors Name', validators=[Required()])
-   categoy = TextAreaField('Blog', validators=[Required()])
+   title = StringField('Title, validators=[Required()])
    blog = TextAreaField('Blog', validators=[Required()])
-   submit = SubmitField('Submit')
+   photo_url = StringField('Photo URL',validators=[Required()])
+   post = SubmitField('Posted blog')
+
+class CommentForm(FlaskForm):
+    name = StringField('Name, validators=[Required()])
+    email = StringField('Email, validators=[Required()])
+    comment_id = TextAreaField('WRITE COMMENT')
+    post = SubmitField('Posted blog')
 
 
-# class UpdateProfile(FlaskForm):
-#    bio = TextAreaField('Tell us about you.', validators=[Required()])
-#    submit = SubmitField('Submit')

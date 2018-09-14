@@ -11,7 +11,12 @@ class BlogForm(FlaskForm):  # create a class that inherits from FlaskForm class
 class CommentForm(FlaskForm):
     name = StringField('Name, validators=[Required()])
     email = StringField('Email, validators=[Required()])
-    comment_id = TextAreaField('WRITE COMMENT')
+    comment_data = TextAreaField('WRITE COMMENT')
     post = SubmitField('Posted blog')
 
+class EmailForm(FlaskForm):
+    name = StringField('Name, validators=[Required()])
+    email = StringField('Email, validators=[Required()])
+    comment_data = TextAreaField('WRITE COMMENT')
+    subscribe = SubmitField('Subscribe')
 

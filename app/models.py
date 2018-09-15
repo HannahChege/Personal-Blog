@@ -28,6 +28,16 @@ class admin(UserMixin,db.Model):
     
     def __repr__(self):
         return f'User {self.username}'
+class Blog(db.Model):
+    __tablename__ = 'blog'
+    id = db.Column(db.Integer,primary_key = True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    category= db.Column(db.String(255),index = True)
+    content= db.Column(db.String(255)) 
+    comments = db.relationship('Comment', backref = 'pitch1', lazy = 'dynamic')
+
+    def __repr__(self):
+        return f'blog {self.content}'          
 
 
 

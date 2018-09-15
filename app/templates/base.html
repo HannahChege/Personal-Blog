@@ -1,19 +1,20 @@
-{% extends  'bootstrap/base.html' %}
+{% extends 'bootstrap/base.html' %}
+<!DOCTYPE html>
 
-<!doctype html>
 <html>
     <head>
-    {% block head %}<link rel='stylesheet' href="{{ url_for('static', filename='style.css') }}"> 
-                   <title>{% block title %}{% endblock %} - My Webpage</title>        
-                           {% endblock %} 
-                        </head> 
-                        <body>
-                            <h1>PERSONAL BLOG</h1>
-                             <div id='content'>{% block content %}{% endblock %}</div>
-                            <div id='footer'>               
-                                {% block footer %}               
-                                &copy; Copyright 2010 by <a href='http://domain.invalid/'>you</a>.   
-                                 {% endblock %} 
-                                </div> 
-                            </body>
-                            </html>
+    </head>
+    <body>    
+        {% block content %}
+
+        {% endblock%}
+
+    
+
+        {% block navbar %}
+            <!--include control block to include navbar.html file-->
+            {% include 'navbar.html' %}
+        {% endblock %}
+
+    </body>
+</html>

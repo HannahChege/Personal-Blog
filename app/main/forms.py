@@ -1,22 +1,29 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,BooleanField
+from wtforms import StringField,TextAreaField,SubmitField,SelectField
 from wtforms.validators import Required
 
-class BlogForm(FlaskForm):  # create a class that inherits from FlaskForm class
-   title = StringField('Title', validators=[Required()])
-   blog = TextAreaField('Blog', validators=[Required()])
-   photo_url = StringField('Photo URL',validators=[Required()])
-   post = SubmitField('Posted blog')
+
+class PitchForm(FlaskForm):
+    category=SelectField('category',
+       choices=[('inspiration', 'inspiration'), ('pickuplines', 'pickuplines'), ('technoloy', 'technoloy'),
+        ('411', '411')], validators = [Required()])
+    pitch = TextAreaField('Pitch')
+    submit = SubmitField('Submit')
+
+
+class UpdateProfile(FlaskForm):
+    bio= TextAreaField('Tell us about you.', validators=[Required()])
+    submit= SubmitField('Submit')
+
+
+class ContentForm(FlaskForm):
+   content = TextAreaField('YOUR PITCH')
+   submit = SubmitField('SUBMIT')
 
 class CommentForm(FlaskForm):
-    name = StringField('Name', validators=[Required()])
-    email = StringField('Email', validators=[Required()])
-    comment_data = TextAreaField('WRITE COMMENT')
-    post = SubmitField('Posted blog')
+   comment_id = TextAreaField('WRITE COMMENT')
+   submit = SubmitField('SUBMIT')
 
-class EmailForm(FlaskForm):
-    name = StringField('Name', validators=[Required()])
-    email = StringField('Email', validators=[Required()])
-    comment_data = TextAreaField('WRITE COMMENT')
-    subscribe = SubmitField('Subscribe')
+
+
 

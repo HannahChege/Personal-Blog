@@ -1,7 +1,7 @@
 Specifications
 | Behaviour                               | Input                                        | Output                                       |
 | :--------------------------------------:| :------------------------------------------: | :------------------------------------------: |
-| Open my heroku line                      | https://hannahnews.herokuapp.com/   | Welcome to My Personal BLog             |
+| Open my heroku app                     | https://hannahblog.herokuapp.com/   | Welcome to My Personal BLog             |
 |The landing page has the blogs posted         | Fill out form on your details                      | Writer a blog          |
 |Sign in as a subscibe                    | Register as a subscribe                     | A new blog post will be outputed   |
 | At home page to view top stories on blogs       | Clicks on view blog            | Opens the Blog posted                      |

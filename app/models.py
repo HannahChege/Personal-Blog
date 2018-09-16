@@ -4,9 +4,11 @@ from flask_login import UserMixin
 from datetime import datetime
 
 
-@login_manager.user_loader
-def load_user(user_i
-    return None
+# #...
+# @login_manager.admin_loader
+# def load_admin(id):
+#         return Admin.query.get(int(id))
+       
 
 class Admin(UserMixin,db.Model):
     __tablename__ = 'admins'

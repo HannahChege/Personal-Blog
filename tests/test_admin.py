@@ -9,9 +9,9 @@ class adminModelCase(unittest.TestCase):
         admin.query.delete()
     def test_password_hashing(self):
         u = admin(username='hannah')
-        u.set_password('1234')
-        self.assertFalse(u.check_password('pass123'))
-        self.assertTrue(u.check_password('1234'))
+        u.set_password('hannah')
+        self.assertFalse(u.check_password('hannah'))
+        self.assertTrue(u.check_password('hannah'))
     def test_save_admin(self):
     def test_check_instance_variables(self):
         self.assertEquals(self.admin_James.username,'James')

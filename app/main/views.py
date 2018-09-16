@@ -22,7 +22,16 @@ def new_blog():
         db.session.commit()
         return redirect(url_for('main.index'))
      
-    return render_template('blog.html',formblog = formblog)   
+    return render_template('blog.html',formblog = formblog)  
+@main.route('/admin/<uname>')
+def profile(uname):
+    admin = Admin.query.filter_by(username = uname).first()
+
+    if admin is None:
+        abort(404)
+
+    return render_template("profile/profile.html", admin = admin)
+
 
 # @main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
 # @login_required

@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from .forms import PitchForm
+from .forms import BlogForm,UpdateProfile
 from .. models import Admin,Blog
 from ..import db
 
@@ -32,7 +32,24 @@ def profile(uname):
 
     return render_template("profile/profile.html", admin = admin)
 
+@main.route('/admin/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    admin = Admin.query.filter_by(username = uname).first()
+    if admin is None:
+        abort(404)
 
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        admin.bio = form.bio.data
+
+        db.session.add(admin)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=admin.username))
+
+    return render_template('profile/update.html',form =form)
 # @main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
 # @login_required
 # def new_comment(pitch_id):  

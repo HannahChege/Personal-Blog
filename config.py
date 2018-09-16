@@ -1,8 +1,7 @@
 import os
 
 class Config:
-
-    
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 

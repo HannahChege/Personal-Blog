@@ -26,7 +26,7 @@ def create_app(config_name):
     login_manager.init_app(app)
     
     #configure UploadSet
-    # configure_uploads(app,photos)
+    configure_uploads(app,photos)
     mail.init_app(app)
 
     #Initializing flask extensions

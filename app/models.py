@@ -1,12 +1,13 @@
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 # #...
 # # @login_manager.user_loader
-# # def load_user(user_id):
+# # def load_user(user_i
 # #     return None
-class admin(UserMixin,db.Model):
+class Admin(UserMixin,db.Model):
     __tablename__ = 'admins'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
@@ -31,14 +32,22 @@ class admin(UserMixin,db.Model):
 class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer,primary_key = True)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    admin_id = db.Column(db.Integer,db.ForeignKey('admin.id'))
     category= db.Column(db.String(255),index = True)
     content= db.Column(db.String(255)) 
-    comments = db.relationship('Comment', backref = 'pitch1', lazy = 'dynamic')
+    comments = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
 
     def __repr__(self):
         return f'blog {self.content}'          
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer,primary_key = True)
+    pitch_id = db.Column(db.Integer,db.ForeignKey ('blog.id'))
+    admin_id = db.Column(db.Integer,db.ForeignKey('admin.id'))
+    content= db.Column(db.String(255)) 
 
+    def __repr__(self):
+        return f'Comment :content {self.content}' 
 
         

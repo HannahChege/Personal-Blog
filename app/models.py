@@ -3,10 +3,11 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-# #...
-# # @login_manager.user_loader
-# # def load_user(user_i
-# #     return None
+
+@login_manager.user_loader
+def load_user(user_i
+    return None
+    
 class Admin(UserMixin,db.Model):
     __tablename__ = 'admins'
     id = db.Column(db.Integer,primary_key = True)

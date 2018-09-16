@@ -2,29 +2,31 @@ import os
 
 class Config:
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    
 
+
+    SECRET_KEY = 'scarletshevannah'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+#  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    SECRET_KEY = os.environ.get('SECRET_KEY')
     
-@staticmethod
-def init_app(app):
-     pass
+    @staticmethod
+    def init_app(app):
+        pass
 class ProdConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://hannah:hannah@localhost/pitch_test'
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://hannah:password@localhost/blog'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://:hannah@localhost/pitch'
     DEBUG = True
-class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://hannah:password@localhost/blog_test'
 
 config_options = {
 'development':DevConfig,
-'production':ProdConfig,
-'test':TestConfig
+'production':ProdConfig
 }

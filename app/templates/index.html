@@ -1,9 +1,21 @@
 {%extends 'base.html'%}
 
-     {%block content%}
-    <h2 font color="pink">BEAUTY , LIFESTYLE AND FASHION</h2>
-         
-        
-         
+{%block content%}
+<h2 font color="pink">BEAUTY , LIFESTYLE AND FASHION</h2>
+   <div class="jumbotron" 'background-color:navyblue';>
+   
+    {%for pitch in pitches%}
 
-    {%endblock%}
+    <p>
+        {{blog.category}}:{{blog.content}}
+        
+    </p>
+    
+   
+    {%endfor%}
+
+</div>
+
+
+
+{%endblock%}

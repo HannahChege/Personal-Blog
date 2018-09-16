@@ -37,10 +37,10 @@ class User(UserMixin,db.Model):
 class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer,primary_key = True)
-    admin_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     category= db.Column(db.String(255),index = True)
     content= db.Column(db.String(255)) 
-    comments = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
+    comments = db.relationship('Comment', backref = 'blog1', lazy = 'dynamic')
 
     def __repr__(self):
         return f'blog {self.content}'          
@@ -49,7 +49,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
     pitch_id = db.Column(db.Integer,db.ForeignKey ('blog.id'))
-    admin_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    admin_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     content= db.Column(db.String(255)) 
 
     def __repr__(self):

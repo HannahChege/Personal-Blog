@@ -26,8 +26,8 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        admin = Admin(email = form.email.data, username = form.username.data,password = form.password.data)
-        db.session.add(admin)
+        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+        db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
         title = "New Account"

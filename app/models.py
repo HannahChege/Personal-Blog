@@ -15,9 +15,9 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
-    bio = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
-    pass_secure = db.Column(db.String(255))
+    bio = db.Column(db.String(100000))
+    profile_pic_path = db.Column(db.String(255))
+    pass_secure = db.Column(db.String(1000000))
 
     @property
     def password(self):
@@ -38,19 +38,19 @@ class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer,primary_key = True)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    category= db.Column(db.String(255),index = True)
-    content= db.Column(db.String(255)) 
+    category= db.Column(db.String(),index = True)
+    content= db.Column(db.String()) 
     comments = db.relationship('Comment', backref = 'blog1', lazy = 'dynamic')
 
     def __repr__(self):
-        return f'blog {self.content}'          
+        return f'blog1 {self.content}'          
 
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
     pitch_id = db.Column(db.Integer,db.ForeignKey ('blog.id'))
     admin_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    content= db.Column(db.String(255)) 
+    content= db.Column(db.String(1000000)) 
 
     def __repr__(self):
         return f'Comment :content {self.content}' 

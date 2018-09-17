@@ -4,9 +4,9 @@ from wtforms.validators import Required
 
 
 class BlogForm(FlaskForm):
-    category=SelectField('category',
-       choices=[('Beauty', 'Beauty'), ('Fashion', 'Fashion'), ('Lifestyle', 'Lifestyle')], validators = [Required()])
-    blog = TextAreaField('Blog')
+    category=TextAreaField('Post your Blog', validators = [Required()])
+    title = TextAreaField('Your name',validators = [Required()])
+    content = TextAreaField('blog',validators = [Required()])
     submit = SubmitField('Submit')
 
 

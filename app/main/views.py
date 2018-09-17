@@ -8,33 +8,32 @@ from ..import db,photos
 
 @main.route('/')
 def index():
-    # blogs = Blog.query.all()
+    blogs = Blog.query.all()
     title = "blog"
-    return render_template('index.html', title = title)
+    return render_template('index.html',blogs=blogs, title = title)
 
 @main.route('/new/blog', methods = ['GET','POST'])
 @login_required
 def new_blog():
-    formblog = BlogForm()
-    if formblog.validate_on_submit():
-        blog = Blog(category = formblog.category.data, content = formblog.blog.data)
-        db.session.add(pitch)
-        db.session.commit()
-        return redirect(url_for('main.index'))
-     
-    return render_template('blog.html',formblog = formblog) 
-
-@main.route('/new/Beauty', methods = ['GET','POST'])
-@login_required
-def new_Beauty():
-    formblog = BlogForm()
-    if formblog.validate_on_submit():
-        blog = Blog(category = formblog.category.data, content = formblog.blog.data)
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog = Blog(category = form.category.data, content = form.blog.data)
         db.session.add(blog)
         db.session.commit()
         return redirect(url_for('main.index'))
      
-    return render_template('beauty.html',formblog = formblog)
+    return render_template('blog.html',form = form ,blog=blog) 
+
+@main.route('/new/Beauty', methods = ['GET','POST'])
+@login_required
+def new_Beauty():
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog = Blog(category = form.category.data, content = form.content.data)
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('beauty.html',form =form)
 
 @main.route('/user/<uname>')
 def profile(uname):

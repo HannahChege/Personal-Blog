@@ -2,19 +2,20 @@
 
 {%block content%}
 <h2 font color="pink">BEAUTY , LIFESTYLE AND FASHION</h2>
-   <div class="jumbotron" 'background-color:navyblue';>
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8VwFiuVRJk6iHQpaJzaqvbBjJwru5mwcSnTsOqz9cwCBdk16E" height="200" width="1300">
+   <div class="well">
    
-    {%for pitch in pitches%}
-
-    <p>
-        {{blog.category}}:{{blog.content}}
-        
-    </p>
+        {%for blog in blogs%}
     
-   
-    {%endfor%}
-
-</div>
+        <p>
+            {{blog.category}}:{{blog.content}}
+            
+        </p>
+        <button>Comment</button>
+        <button>READMORE</button>
+        
+        {%endfor%}
+        </div>
 
 
 

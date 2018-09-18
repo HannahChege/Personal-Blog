@@ -55,11 +55,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'Comment :content {self.content}' 
-class Photo(db.Model):
-    __tablename__='photos'
-    id = db.Column(db.Integer,primary_key=True)
-    photo_data = db.Column(db.String(255))
-    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))        
+       
 
 
         

@@ -1,28 +1,18 @@
-from datetime import datetime, timedelta
 import unittest
-from .app import db
-from app.models import User, Blog
+from app.models import User
+from app import db
 
-class UserModelCase(unittest.TestCase):
+class UserModelTest(unittest.TestCase):
+
     def setUp(self):
-        self.user_James = User(id=1,username = 'James',password = 'potato', email = 'james@ms.com')
+        self.new_user = User(password = 'hannah')
 
-    def tearDown(self):
-        User.query.delete()
-    def test_password_hashing(self):
-        u = User(username='hannah')
-        u.set_password('hannah')
-        self.assertFalse(u.check_password('hannah'))
-        self.assertTrue(u.check_password('hannah'))
-    def test_save_user(self):
-    def test_check_instance_variables(self):
-        self.assertEquals(self.user_James.username,'James')
-        self.assertEquals(self.user_James.password,'potato')
-        self.assertEquals(self.user_James.email,"james@ms.com")
-    def test_save_review(self):
-        self.user_James.save_user()
-        self.assertTrue(len(User.query.all())>0)
-    def test_get_user_by_id(self):
-        self.user_James.save_user()
-        fetched_user = User.get_user(1)
-        self.assertTrue(len(fetched_user) == 1)
+    def test_password_setter(self):
+        self.assertTrue(self.new_user.pass_secure is not None)
+
+    def test_no_access_password(self):
+            with self.assertRaises(AttributeError):
+                self.new_user.password
+
+    def test_password_verification(self):
+        self.assertTrue(self.new_user.verify_password('hannah'))    

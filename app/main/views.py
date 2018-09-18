@@ -35,6 +35,27 @@ def new_Beauty():
         return redirect(url_for('main.index'))
     return render_template('beauty.html',form =form)
 
+@main.route('/new/fashion', methods = ['GET','POST'])
+@login_required
+def new_fashion():
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog = Blog(category = form.category.data, content = form.content.data)
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('fashion.html',form =form)    
+@main.route('/new/lifestyle', methods = ['GET','POST'])
+@login_required
+def new_lifestyle():
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog = Blog(category = form.category.data, content = form.content.data)
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('lifestyle.html',form =form)    
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -62,7 +83,7 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
-@main.route('/admin/<uname>/update/pic',methods= ['POST'])
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()

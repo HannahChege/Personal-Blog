@@ -48,8 +48,8 @@ class Blog(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
-    pitch_id = db.Column(db.Integer,db.ForeignKey ('blog.id'))
-    admin_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer,db.ForeignKey ('blog.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     content= db.Column(db.String(1000000)) 
 
     def __repr__(self):

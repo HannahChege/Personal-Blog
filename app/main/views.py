@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from .forms import BlogForm,UpdateProfile
+from .forms import BlogForm,UpdateProfile,CommentForm
 from .. models import User,Blog,Comment
 from ..import db,photos
 
@@ -72,13 +72,19 @@ def update_pic(uname):
         admin.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))    
-# @main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
-# @login_required
-# def new_comment(pitch_id):  
-#     '''
-#     View the root page function
-#     '''
-#     pass
+
+@main.route('/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):  
+    comment = CommentForm()
+    if comment.validate_on_submit():
+        com = Comment(content=comment.comment.data,blog_id=id)
+        db.session.add(com)
+        db.session.commit()
+        
+    return render_template('comment.html',comment=comment)
+
+
 
 
 

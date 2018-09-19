@@ -1,3 +1,5 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
 <div class="navbar navbar-inverse" role="navigation" style="background-color: pink;">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -25,7 +27,9 @@
                     <li style="color:white;padding:15px;">{{current_user.username}}</li>
                     <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                     {% else %}
-                    <li><a href="{{url_for('auth.login')}}">SUBSCRIBE</a></li>
+                    <!-- <li><a href="{{url_for('auth.login')}}">SUBSCRIBE</a></li> -->
+                    <li><a href="{{url_for('main.subscriber')}}">Subscriber</a></li>
+                    
                     {%endif%}
                     
                   </ul>

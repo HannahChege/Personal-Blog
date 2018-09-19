@@ -2,15 +2,17 @@ from flask import Flask
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from .forms import BlogForm,UpdateProfile,CommentForm
-from .. models import User,Blog,Comment
+from .forms import BlogForm,UpdateProfile,CommentForm,SubscriberForm
+from .. models import User,Blog,Comment,Subscriber
+from ..email import mail_message
 from ..import db,photos
 
 @main.route('/')
 def index():
+    subscriber_form=SubscriberForm()
     blogs = Blog.query.all()
     title = "blog"
-    return render_template('index.html',blogs=blogs, title = title)
+    return render_template('index.html',blogs=blogs,subscriber_form=subscriber_form, title = title)
 
 @main.route('/new/blog', methods = ['GET','POST'])
 @login_required
@@ -23,6 +25,20 @@ def new_blog():
         return redirect(url_for('main.index'))
      
     return render_template('blog.html',form = form ,blog=blog) 
+
+
+
+@main.route('/', methods=['GET','POST'])
+def subscriber():
+    subscriber_form=SubscriberForm()
+    if subscriber_form.validate_on_submit():
+        subscriber= Subscriber(email=subscriber_form.email.data,title = subscriber_form.title.data)
+        db.session.add(subscriber)
+        db.session.commit()
+        mail_message("Hey Welcome To My Personal Blog ","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+    subscriber = Blog.query.all()
+    beauty = Blog.query.all()
+    return render_template('index.html',subscriber=subscriber,subscriber_form=subscriber_form,beauty=beauty) 
 
 @main.route('/new/Beauty', methods = ['GET','POST'])
 @login_required
